@@ -23,8 +23,15 @@ int main()
     cout<<endl;
 
     ar->preOrden();
+    cout<<endl;
+    //altura
+    int altura = ar->Altura();
+    cout << "es: " << altura << endl;
+    
     //cout<<ar->cantNodos();
-
+    //cantidad de nodos
+    int cantidadNodos=ar->CantidadNodos();
+    cout<<"es: "<<cantidadNodos<<endl;
+    ar->PorNivel();
     return 0;
-
 }

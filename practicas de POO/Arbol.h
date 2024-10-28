@@ -1,4 +1,6 @@
+#include<vector>
 template <class T>
+
 class Arbol{
     private:
         Nodo<T> *raiz;
@@ -21,6 +23,18 @@ class Arbol{
         }
         void preOrden(){
             preOrden(raiz);
+        }
+        //altura
+        int Altura() {
+        return AlturaNodo(raiz);
+        }
+        //cantidad de nodos
+        int CantidadNodos(){
+            return ContarNodos(raiz);
+        }
+        //impresion en niveles
+        void PorNivel(){
+            PorNivel(raiz);
         }
     protected:
         void Insertar(Nodo<T> *r, Nodo<T> *n){
@@ -89,6 +103,42 @@ class Arbol{
                     padre->hijoDer =n;
                 }
         }*/
-    //DESARROLLAR LOS 3 RECORRIDOS EN FORMA ITERATIVA
-    
-};
+    //altura del arbol
+    int AlturaNodo(Nodo<T>* nodo) {
+        if (nodo == nullptr) {
+            return -1; // Devuelve -1 si el nodo es nulo
+        }
+        int alturaIzquierda = AlturaNodo(nodo->retHijoIzq());
+        int alturaDerecha = AlturaNodo(nodo->retHijoDer());
+        return 1 + max(alturaIzquierda, alturaDerecha);
+    }
+        int ContarNodos(Nodo<T>*nodo){
+            if (nodo== NULL){
+                return 0;
+            }
+            return 1 + ContarNodos(nodo->retHijoIzq()) + ContarNodos(nodo->retHijoDer());
+        }
+        //impresion por niveles
+        void PorNivel(Nodo<T>* nodo) {
+        if (nodo == nullptr) return;
+
+        vector<Nodo<T>*> nodosPorNivel; // Usar un vector como "cola"
+        nodosPorNivel.push_back(nodo); // Comenzar desde la raíz
+
+        int indice = 0; // Indice del siguiente nodo a procesar
+
+        while (indice < nodosPorNivel.size()) {
+            Nodo<T>* actual = nodosPorNivel[indice]; // Obtener el nodo actual
+            cout << actual->retDato() << " "; // Imprimir el nodo actual
+
+            // Añadir los hijos a la lista
+            if (actual->retHijoIzq() != nullptr) {
+                nodosPorNivel.push_back(actual->retHijoIzq());
+            }
+            if (actual->retHijoDer() != nullptr) {
+                nodosPorNivel.push_back(actual->retHijoDer());
+            }
+            indice++;
+        }
+        }
+ };
