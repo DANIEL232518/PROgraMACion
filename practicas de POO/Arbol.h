@@ -83,7 +83,6 @@ class Arbol{
             Nodo<T> *n=new Nodo<T>(v);
             if(raiz==null){
                 raiz=n;
-                return;
             }
             Nodo<T>* actual =raiz;
             Nodo<T>* padre= NULL
